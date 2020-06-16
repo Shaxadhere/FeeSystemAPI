@@ -6,9 +6,13 @@ $Username = $_REQUEST["Username"];
 $Password = $_REQUEST["Password"];
 $conn = connect();
 
-$authUser = getUser($Username, $Password, $conn);
+$authUser = mysqli_fetch_array(getUser($Username, $Password, $conn));
 
-if($authUser != null){
+if(isset($authUser)){
+    showAlert("Authenticated");
     return $authUser;
+}
+else{
+    showAlert("Not Authenticated");
 }
 ?>

@@ -105,8 +105,12 @@ function editData(string $table, array $data, string $PrimaryKey, $id, $conn){
     mysqli_query($conn, $query);
 }
 //Get User Data//
-function getUser(string $email, string $password, $conn){
-    $res = mysqli_query($conn, "select * from tbl_User where Email = $email and Password = $password");
+function getUser(string $username, string $password, $conn){
+    $res = mysqli_query($conn, "select * from tbl_User where Username = $username and Password = $password");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
     return $res;
 }
 
