@@ -114,4 +114,13 @@ function getUser(string $username, string $password, $conn){
     return $res;
 }
 
+//Get User Data//
+function getAdmin(string $username, string $password, $conn){
+    $res = mysqli_query($conn, "select * from tbl_Admin where Username = $username and Password = $password");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
 ?>
