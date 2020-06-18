@@ -123,4 +123,38 @@ function getAdmin(string $username, string $password, $conn){
     }
     return $res;
 }
+
+//Get User Email//
+function getContact(string $username, $conn){
+    $res = mysqli_query($conn, "select `PK_ID`, `Email`, `FullName` from tbl_User where Username = $username");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return mysqli_fetch_array($res);
+}
+
+function getToken($id, $conn){
+    $res = mysqli_query($conn, "select `ResetToken` from tbl_User where PK_ID = $id");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return mysqli_fetch_array($res);
+}
+//Clean Text//
+function clean_text($string)
+{
+	$string = trim($string);
+	$string = stripslashes($string);
+	$string = htmlspecialchars($string);
+	return $string;
+}
+
+//Generate Radnom String
+function random_strings($length_of_string) 
+{
+    $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; 
+	return substr(str_shuffle($str_result),0, $length_of_string); 
+} 
 ?>
