@@ -134,6 +134,16 @@ function getContact(string $username, $conn){
     return mysqli_fetch_array($res);
 }
 
+//Filter User//
+function filterUser($id, $conn){
+    $res = mysqli_query($conn, "select * from tbl_User where PK_ID = $id");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return mysqli_fetch_array($res);
+}
+
 function getToken($id, $conn){
     $res = mysqli_query($conn, "select `ResetToken` from tbl_User where PK_ID = $id");
     if (!$res) {
@@ -152,9 +162,47 @@ function clean_text($string)
 }
 
 //Generate Radnom String
-function random_strings($length_of_string) 
+function random_strings ($length_of_string) 
 {
     $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; 
 	return substr(str_shuffle($str_result),0, $length_of_string); 
 } 
+
+function getFeeDetails($id, $conn){
+    $res = mysqli_query($conn, "SELECT tbl_user.PK_ID, tbl_user.PaidFee, tbl_programme.TotalFee, tbl_user.JoinigData, tbl_programme.Advance, tbl_programme.Tuition FROM tbl_user INNER JOIN tbl_programme ON tbl_user.FK_Programme = tbl_programme.PK_ID where tbl_user.PK_ID = $id");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return mysqli_fetch_array($res);
+}
+
+function getNextDays($number_of_days){
+    $days   = [];
+    $period = new DatePeriod(
+    new DateTime(), // Start date of the period
+    new DateInterval('P1D'), // Define the intervals as Periods of 1 Day
+    $number_of_days // Apply the interval 6 times on top of the starting date
+    );
+
+    foreach ($period as $day)
+    {
+        $days[] = $day->format('Y-m-d H:i:s');
+    }
+    return $days;
+}
+
+function calcMonths($start_date, $end_date){
+    $ts1 = strtotime($start_date);
+    $ts2 = strtotime($end_date);
+
+    $year1 = date('Y', $ts1);
+    $year2 = date('Y', $ts2);
+
+    $month1 = date('m', $ts1);
+    $month2 = date('m', $ts2);
+
+    $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+    return $diff;
+}
 ?>
