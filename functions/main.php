@@ -169,7 +169,7 @@ function random_strings ($length_of_string)
 } 
 
 function getFeeDetails($id, $conn){
-    $res = mysqli_query($conn, "SELECT tbl_user.PK_ID, tbl_user.PaidFee, tbl_programme.TotalFee, tbl_user.JoinigData, tbl_programme.Advance, tbl_programme.Tuition FROM tbl_user INNER JOIN tbl_programme ON tbl_user.FK_Programme = tbl_programme.PK_ID where tbl_user.PK_ID = $id");
+    $res = mysqli_query($conn, "SELECT tbl_user.PK_ID, tbl_user.PaidFee, tbl_programme.TotalFee, tbl_user.JoinigData, tbl_programme.Advance, tbl_programme.Tuition, tbl_user.CourseStatus, tbl_user.IsAdvancePaid FROM tbl_user INNER JOIN tbl_programme ON tbl_user.FK_Programme = tbl_programme.PK_ID where tbl_user.PK_ID = $id");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
