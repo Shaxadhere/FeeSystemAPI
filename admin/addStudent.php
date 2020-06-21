@@ -85,9 +85,13 @@ if($joiningDate == null){
     $joiningDate = date("Y-m-d");
 }
 
-$fields = array("FullName", "Username", "StudentID", "IsAdvancePaid", "CourseStatus", "ContactNumber", "PaidFee", "Password", "FK_Programme", "FK_Batch", "Email", "JoinigData", "CurrentSemester");
-$data = array($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester);
-insertData("tbl_User", $fields, $data, $conn);
-
-return "Student added!";
+if($errors == null){
+    $fields = array("FullName", "Username", "StudentID", "IsAdvancePaid", "CourseStatus", "ContactNumber", "PaidFee", "Password", "FK_Programme", "FK_Batch", "Email", "JoinigData", "CurrentSemester");
+    $data = array($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester);
+    insertData("tbl_User", $fields, $data, $conn);
+    return "Student added!";
+}
+else{
+    return $errors;
+}
 ?>
