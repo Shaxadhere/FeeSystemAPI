@@ -41,9 +41,6 @@ if(!$isAdvancePaid){
     } 
 }
 
-if(!$isAdvancePaid){
-    
-}
 //Getting the month in which fee was started to charge//
 $feeStart = date("Y-m-d", strtotime("+1 month", $joiningDate));
 

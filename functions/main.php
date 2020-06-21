@@ -144,6 +144,27 @@ function filterUser($id, $conn){
     return mysqli_fetch_array($res);
 }
 
+//Get All Semesters//
+function getCurrentSemester($programmeID, $position, $conn){
+    $res = mysqli_query($conn, "SELECT * from tbl_semester where tbl_semester.FK_ProgrammeSemester = $programmeID and tbl_semester.Position = $position");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return mysqli_fetch_array($res);
+}
+
+//Get Attendance Details//
+function getAttendanceDetails($FK_User, $conn){
+    $res = mysqli_query($conn, "SELECT tbl_attendance.AttendedSessions from tbl_attendance where tbl_attendance.FK_User = $FK_User");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return mysqli_fetch_array($res);
+}
+
+//Get Reset Token//
 function getToken($id, $conn){
     $res = mysqli_query($conn, "select `ResetToken` from tbl_User where PK_ID = $id");
     if (!$res) {
