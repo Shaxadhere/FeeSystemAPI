@@ -22,6 +22,7 @@ $advanceFee = $feeDetails[4];
 $tuitionFee = $feeDetails[5];
 $joiningDate = $feeDetails[3];
 $courseStatus = $feeDetails[6];
+$unpaidFee = 0;
 
 
 
@@ -52,25 +53,26 @@ $feeCalc = $months * $tuitionFee + $advanceFee;
 
 //Checking if the right amount of fee is paid//
 if($feeCalc == $paidFee){
-    $feeInfo = array($paidFee, $totalFee, $remainingFee, $joiningDate, $isFeePaid, $sendNotif, $courseStatus);
+    $feeInfo = array($paidFee, $totalFee, $remainingFee, $joiningDate, $isFeePaid, $sendNotif, $courseStatus, $unpaidFee);
     return $feeInfo;
 }
 
 //Checking if right amount of fee is not paid//
 if($feeCalc > $paidFee){
     $isFeePaid = false;
+    $unpaidFee = $feeCalc - $paidFee;
 
     //Returning data with notification//
     if($today > $seventhDay && $today <= $dueDate){
         $sendNotif = true;
-        $feeInfo = array($paidFee, $totalFee, $remainingFee, $joiningDate, $isFeePaid, $sendNotif, $courseStatus);
+        $feeInfo = array($paidFee, $totalFee, $remainingFee, $joiningDate, $isFeePaid, $sendNotif, $courseStatus, $unpaidFee);
         return $feeInfo;
     }
 
     //Returning data without notification//
     if($today == $firstDay || $today >= $firstDay && $today <= $seventhDay){
         $sendNotif = false;
-        $feeInfo = array($paidFee, $totalFee, $remainingFee, $joiningDate, $isFeePaid, $sendNotif, $courseStatus);
+        $feeInfo = array($paidFee, $totalFee, $remainingFee, $joiningDate, $isFeePaid, $sendNotif, $courseStatus, $unpaidFee);
         return $feeInfo;
     }
 }
