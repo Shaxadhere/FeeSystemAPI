@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <title>Welcome to FeeSystemAPI</title>
+
+    <!-- Styles -->
+    <link href="assets/css/page.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+    <link rel="icon" href="assets/img/favicon.png">
+  </head>
+
+  <body data-spy="scroll" data-target=".nav-sidebar" data-offset="100">
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-stick-dark">
+      <div class="container">
+
+        <div class="navbar-left">
+          <button class="navbar-toggler" type="button">&#9776;</button>
+          <a class="navbar-brand" onclick="window.location.reload();">
+            <img class="logo-dark" src="assets/img/logo-dark.png" alt="logo">
+            <img class="logo-light" src="assets/img/logo-light.png" alt="logo">
+          </a>
+        </div>
+      </div>
+    </nav><!-- /.navbar -->
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-xl-3">
+            <aside class="sidebar sidebar-expand-md sidebar-sticky pr-md-4 br-1">
+              <div class="sidebar-body">
+                <ul class="nav nav-sidebar nav-sidebar-hero nav-sidebar-pill">
+                  <li class="nav-item"><a class="nav-link" href="#intro">Introduction <i class="nav-angle"></i></a></li>
+                  <li class="nav-item"><a class="nav-link" href="#requests">Requests <i class="nav-angle"></i></a></li>
+                  <li class="nav-item"><a class="nav-link" href="#navbar">Layout <i class="nav-angle"></i></a></li>
+                  <li class="nav-item"><a class="nav-link" href="#navbar">Layout <i class="nav-angle"></i></a></li>
+                  <li class="nav-item"><a class="nav-link" href="#navbar">Layout <i class="nav-angle"></i></a></li>
+                  <li class="nav-item"><a class="nav-link" href="#navbar">Layout <i class="nav-angle"></i></a></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+          <div class="col-md-7 col-xl-8 ml-md-auto py-8">
+            <h2 id="intro">Introduction</h2>
+            <p class="lead-2">
+              FeeSystemAPI is an api developed for an android app called FeeManagemetSystem, this api is based on php 5.2 and works flawlessly.
+            </p>
+            <hr class="hr-dash my-7">
+            <br>
+            <h2 id="requests">Requests</h2>
+            <p class="lead-2">
+              Here are all requests and required information to use them along with the paramenters and responses.
+            </p>
+            <h4>Student Login:</h4>
+            <pre class="language-markup line-numbers">
+              <code>/auth/login.php</code>
+            </pre>
+            <h6>Parameters</h6>
+            <p>Username, Password</p>
+
+            <hr class="hr-dash my-7">
+
+            <h4>Admin Login:</h4>
+            <pre class="language-markup line-numbers">
+              <code>/auth/admin.php</code>
+            </pre>
+            <h6>Parameters</h6>
+            <p>Username, Password</p>
+
+            <hr class="hr-dash my-7">
+
+            <h4>Forgot Password:</h4>
+            <pre class="language-markup line-numbers">
+              <code>/auth/forgotpassword.php</code>
+            </pre>
+            <h6>Parameters</h6>
+            <p>Username</p>
+
+            <hr class="hr-dash my-7">
+
+            <h4>Check Attendance:</h4>
+            <pre class="language-markup line-numbers">
+              <code>/student/check_attendance.php</code>
+            </pre>
+            <h6>Parameters</h6>
+            <p>User ID</p>
+
+            <hr class="hr-dash my-7">
+
+            <h4>Check Fee:</h4>
+            <pre class="language-markup line-numbers">
+              <code>/student/check_fee.php</code>
+            </pre>
+            <h6>Parameters</h6>
+            <p>User ID</p>
+
+            <hr class="hr-dash my-7">
+
+            <h4>Add Student:</h4>
+            <pre class="language-markup line-numbers">
+              <code>/admin/add_student.php</code>
+            </pre>
+            <h6>Parameters</h6>
+            <p>fullName, username, studentId, isAdvancePaid, courseStatus, contactNumber, paidFee, password, FK_Programme, FK_Batch, joiningDate</p>
+           
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer class="footer text-center">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-auto mr-auto">
+            <nav class="nav justify-content-center justify-content-lg-start">
+              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#">Contact</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer><!-- /.footer -->
+
+
+    <!-- Scripts -->
+    <script src="assets/js/page.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    
+
+  </body>
+
+</html>
