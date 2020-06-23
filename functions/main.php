@@ -173,6 +173,17 @@ function getToken($id, $conn){
     }
     return mysqli_fetch_array($res);
 }
+
+//Get User Email//
+function getBatches($count, $conn){
+    $res = mysqli_query($conn, "SELECT `PK_ID`, `BatchID` FROM `tbl_batch` ORDER BY tbl_batch.PK_ID DESC LIMIT $count");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return mysqli_fetch_array($res);
+}
+
 //Clean Text//
 function clean_text($string)
 {
@@ -198,6 +209,27 @@ function getFeeDetails($id, $conn){
     return mysqli_fetch_array($res);
 }
 
+//GET Batch Students//
+function getBactchStudents($batchID, $conn){
+    $res = mysqli_query($conn, "select * from tbl_User where FK_Batch = $batchID");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
+
+//Mark Attendance//
+function markAttendance($attendedSessions, $user_id, $conn){
+    $res = mysqli_query($conn, "update tbl_attendance set tbl_attendance.AttendedSessions = tbl_attendance.AttendedSessions + $attendedSessions where FK_User = $user_id");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
+
+//Get next days//
 function getNextDays($number_of_days){
     $days   = [];
     $period = new DatePeriod(

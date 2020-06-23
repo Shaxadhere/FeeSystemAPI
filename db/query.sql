@@ -45,3 +45,7 @@ Password varchar(50) not null,
 ContactNumber varchar(50),
 FullName varchar(50)
 );
+
+add student:
+INSERT INTO `tbl_user`(`FullName`, `Username`, `StudentID`, `IsAdvancePaid`, `CourseStatus`, `ContactNumber`, `PaidFee`, `Password`, `FK_Programme`, `FK_Batch`, `Email`, `ResetToken`, `JoinigData`, `CurrentSemester`)
+VALUES ('Umair', 'umairkhan', '1040706', 1, 1, '03030303030', 12000, '123', 1, 1, 'umair@mail.com', '', '2020-4-17', 1)
