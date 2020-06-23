@@ -46,13 +46,20 @@ else if(validatePlainText($fullName))
 if(empty($username)){
     array_push($errors, "Username is required");
 }
+else if(!check_existance("tbl_User", "Username", $username, $conn)){
+    array_push($errors, "Username already exists");
+}
 else if(validateUsername($username))
 {
     array_push($errors, "Invalid username provided");
 }
 
+
 if(empty($studentId)){
     array_push($errors, "StudentId is required");
+}
+else if(!check_existance("tbl_User", "Username", $studentId, $conn)){
+    array_push($errors, "Student with this ID already exists");
 }
 else if(validateAlphanumeric($studentId))
 {
@@ -86,9 +93,8 @@ if($joiningDate == null){
 }
 
 if($errors == null){
-    $fields = array("FullName", "Username", "StudentID", "IsAdvancePaid", "CourseStatus", "ContactNumber", "PaidFee", "Password", "FK_Programme", "FK_Batch", "Email", "JoinigData", "CurrentSemester");
-    $data = array($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester);
-    insertData("tbl_User", $fields, $data, $conn);
+    $data = addStudent($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester, $conn);    
+    insertData("tbl_Attendance", array("PK_ID"), array($data[0]), $conn);
     return "Student added!";
 }
 else{

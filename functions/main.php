@@ -175,8 +175,8 @@ function getToken($id, $conn){
 }
 
 //Get User Email//
-function getBatches($count, $conn){
-    $res = mysqli_query($conn, "SELECT `PK_ID`, `BatchID` FROM `tbl_batch` ORDER BY tbl_batch.PK_ID DESC LIMIT $count");
+function getBatches($start_row, $end_row, $conn){
+    $res = mysqli_query($conn, "SELECT `PK_ID`, `BatchID` FROM `tbl_batch` ORDER BY tbl_batch.PK_ID DESC LIMIT $start_row, $end_row");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
@@ -229,6 +229,49 @@ function markAttendance($attendedSessions, $user_id, $conn){
     return $res;
 }
 
+//Select Batch//
+function selectBatch($conn){
+    $res = mysqli_query($conn, "SELECT `PK_ID`, `BatchID` FROM `tbl_batch` ORDER BY tbl_batch.PK_ID DESC");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
+
+//Select Programme//
+function selectProgramme($conn){
+    $res = mysqli_query($conn, "SELECT `PK_ID`, `ProgrammeName` FROM `tbl_Programme` ORDER BY tbl_Programme.PK_ID DESC");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
+
+//Check if username already exists//
+function check_existance($table, $column_name, $value, $conn){
+    $res = mysqli_query($conn, "select count($column_name) from $table where $column_name = $value");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    if($res == 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+//Add Student//
+function addStudent($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester, $conn){
+    $res = mysqli_query($conn, "INSERT INTO `tbl_user`(`FullName`, `Username`, `StudentID`, `IsAdvancePaid`, `CourseStatus`, `ContactNumber`, `PaidFee`, `Password`, `FK_Programme`, `FK_Batch`, `Email`, `JoinigData`, `CurrentSemester`) VALUES ($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester select `PK_ID` from `tbl_user` where `PK_ID`=LAST_INSERT_ID()");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
 //Get next days//
 function getNextDays($number_of_days){
     $days   = [];
