@@ -249,7 +249,7 @@ function selectProgramme($conn){
     return $res;
 }
 
-//Check if username already exists//
+//Check if same value already exists//
 function check_existance($table, $column_name, $value, $conn){
     $res = mysqli_query($conn, "select count($column_name) from $table where $column_name = $value");
     if (!$res) {
