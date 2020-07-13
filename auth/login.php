@@ -17,7 +17,6 @@ if(isset($authUser)){
 
 }
 else{
-    echo "Not Authenticated";
-    return false;
+    echo "false";
 }
 ?>

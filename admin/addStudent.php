@@ -95,9 +95,9 @@ if($joiningDate == null){
 if($errors == null){
     $data = addStudent($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester, $conn);    
     insertData("tbl_Attendance", array("PK_ID"), array($data[0]), $conn);
-    return "Student added!";
+    echo "true";
 }
 else{
-    return $errors;
+    echo json_encode($errors);
 }
 ?>
