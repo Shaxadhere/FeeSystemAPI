@@ -9,6 +9,7 @@ if($page_num == null){
 $end_row = $page_num + 15;
 
 $conn = connect();
+
 return getBatches($start_row, $end_row, $conn);
 
 ?>

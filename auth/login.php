@@ -8,27 +8,16 @@ $conn = connect();
 
 $authUser = mysqli_fetch_assoc(getUser($Username, $Password, $conn));
 
-
-    $temp[] = $authUser;
-
-
-$json['users'] = $temp;
-$jsonformat = json_encode($json);
-echo($jsonformat);
+$temp[] = $authUser;
 
 
+if(isset($authUser)){
+    $json['users'] = $temp;
+    echo json_encode($json);
 
-
-// if(isset($authUser)){
-//     showAlert("Authenticated");
-//     echo json_encode($authUser);
-//     $json['users'] = $temp;
-//     $jsonformat = json_encode($json);
-//     //echo $authUser;
-// }
-// else{
-//     showAlert("Not Authenticated");
-//     echo "Not Authenticated";
-//     return false;
-// }
+}
+else{
+    echo "Not Authenticated";
+    return false;
+}
 ?>

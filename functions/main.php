@@ -106,7 +106,7 @@ function editData(string $table, array $data, string $PrimaryKey, $id, $conn){
 }
 //Get User Data//
 function getUser(string $username, string $password, $conn){
-    $res = mysqli_query($conn, "select * from tbl_User where Username = $username and Password = $password");
+    $res = mysqli_query($conn, "select * from tbl_user where Username = $username and Password = $password");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
@@ -126,7 +126,7 @@ function getAdmin(string $username, string $password, $conn){
 
 //Get User Email//
 function getContact(string $username, $conn){
-    $res = mysqli_query($conn, "select `PK_ID`, `Email`, `FullName` from tbl_User where Username = $username");
+    $res = mysqli_query($conn, "select `PK_ID`, `Email`, `FullName` from tbl_user where Username = $username");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
@@ -136,7 +136,7 @@ function getContact(string $username, $conn){
 
 //Filter User//
 function filterUser($id, $conn){
-    $res = mysqli_query($conn, "select * from tbl_User where PK_ID = $id");
+    $res = mysqli_query($conn, "select * from tbl_user where PK_ID = $id");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
@@ -166,7 +166,7 @@ function getAttendanceDetails($FK_User, $conn){
 
 //Get Reset Token//
 function getToken($id, $conn){
-    $res = mysqli_query($conn, "select `ResetToken` from tbl_User where PK_ID = $id");
+    $res = mysqli_query($conn, "select `ResetToken` from tbl_user where PK_ID = $id");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
@@ -211,7 +211,7 @@ function getFeeDetails($id, $conn){
 
 //GET Batch Students//
 function getBactchStudents($batchID, $conn){
-    $res = mysqli_query($conn, "select * from tbl_User where FK_Batch = $batchID");
+    $res = mysqli_query($conn, "select * from tbl_user where FK_Batch = $batchID");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
@@ -323,6 +323,9 @@ function validatePassword(string $password) {
 
     if($count >= 3){
         return true;
+    }
+    else{
+        return false;
     }
 }
 

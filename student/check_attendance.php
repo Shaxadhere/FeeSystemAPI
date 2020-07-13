@@ -20,5 +20,6 @@ $remainingSessions = $totalSession - $attendedSessions;
 $attendacePercentage = ($attendedSessions / 100) * $totalSession;
 
 $attenddanceDetails = array($semesterName, $totalSession, $attendedSessions, $remainingSessions);
-return $attenddanceDetails;
+$json_array["attendance"] = $attenddanceDetails;
+echo json_encode($json_array);
 ?>
