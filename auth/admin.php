@@ -6,14 +6,17 @@ $Username = $_REQUEST["Username"];
 $Password = $_REQUEST["Password"];
 $conn = connect();
 
-$authUser = mysqli_fetch_array(getAdmin($Username, $Password, $conn));
+$authUser = mysqli_fetch_assoc(getAdmin($Username, $Password, $conn));
+
+$temp[] = $authUser;
+
 
 if(isset($authUser)){
-    showAlert("Authenticated");
-    return $authUser;
+    $json['users'] = $temp;
+    echo json_encode($json);
+
 }
 else{
-    showAlert("Not Authenticated");
-    return false;
+    echo "false";
 }
 ?>

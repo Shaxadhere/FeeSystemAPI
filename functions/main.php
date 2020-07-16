@@ -116,7 +116,7 @@ function getUser(string $username, string $password, $conn){
 
 //Get User Data//
 function getAdmin(string $username, string $password, $conn){
-    $res = mysqli_query($conn, "select * from tbl_Admin where Username = $username and Password = $password");
+    $res = mysqli_query($conn, "select * from tbl_admin where Username = $username and Password = $password");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
@@ -242,6 +242,26 @@ function selectBatch($conn){
 //Select Programme//
 function selectProgramme($conn){
     $res = mysqli_query($conn, "SELECT `PK_ID`, `ProgrammeName` FROM `tbl_Programme` ORDER BY tbl_Programme.PK_ID DESC");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
+
+//GetUserBatch//
+function getBatch($user_id, $conn){
+    $res = mysqli_query($conn, "SELECT `BatchID` FROM `tbl_batch` INNER join tbl_user on tbl_batch.PK_ID = tbl_user.FK_Batch where  tbl_user.PK_ID = $user_id");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
+
+//GetUserBatch//
+function getProgramme($user_id, $conn){
+    $res = mysqli_query($conn, "SELECT `ProgrammeName` FROM `tbl_programme` INNER join tbl_user on tbl_programme.PK_ID = tbl_user.FK_Programme where  tbl_user.PK_ID = $user_id");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
