@@ -25,12 +25,11 @@ $fullName = clean_text($_REQUEST['fullName']);
 $username  = clean_text($_REQUEST['username']);
 $studentId = clean_text($_REQUEST['studentId']);
 $isAdvancePaid = $_REQUEST['isAdvancePaid'];
-$courseStatus = $_REQUEST['courseStatus'];
-$contactNumber = clean_text($_REQUEST['contactNumber']);
 $paidFee = $_REQUEST['paidFee'];
 $password = clean_text($_REQUEST['password']);
 $fk_Programme = $_REQUEST['FK_Programme'];
 $fk_Batch = $_REQUEST['FK_Batch'];
+$email = $_Request["email"];
 $currentSemester = 1;
 $joiningDate = $_REQUEST['joiningDate'];
 
@@ -93,7 +92,7 @@ if($joiningDate == null){
 }
 
 if($errors == null){
-    $data = addStudent($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester, $conn);    
+    $data = addStudent($fullName, $username, $studentId, $isAdvancePaid, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester, $conn);    
     insertData("tbl_Attendance", array("PK_ID"), array($data[0]), $conn);
     echo "true";
 }

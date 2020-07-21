@@ -7,6 +7,12 @@ $batch = $_REQUEST['batchID'];
 
 $batchStudents = getBactchStudents($batch, $conn);
 
-return $batchStudents;
+while ($row = mysqli_fetch_assoc($batchStudents)) {
+    $batchStudentsList[] = $row;
+}
+
+$temp[] = $batchStudentsList;
+$json['batchStudentsList'] = $temp;
+echo json_encode($json);
 
 ?>

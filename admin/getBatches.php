@@ -2,14 +2,17 @@
 
 include_once('../config.php');
 
-$start_row = $_REQUEST['start_row'];
-if($page_num == null){
-    $page_num = 0;
-}
-$end_row = $page_num + 15;
-
 $conn = connect();
 
-return getBatches($start_row, $end_row, $conn);
+$batches = getBatches($conn);
+
+
+while ($row = mysqli_fetch_assoc($batches)) {
+    $batchList[] = $row;
+}
+
+$temp[] = $batchList;
+$json['batchList'] = $temp;
+echo json_encode($json);
 
 ?>

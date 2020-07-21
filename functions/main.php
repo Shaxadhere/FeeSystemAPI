@@ -175,13 +175,13 @@ function getToken($id, $conn){
 }
 
 //Get User Email//
-function getBatches($start_row, $end_row, $conn){
-    $res = mysqli_query($conn, "SELECT `PK_ID`, `BatchID` FROM `tbl_batch` ORDER BY tbl_batch.PK_ID DESC LIMIT $start_row, $end_row");
+function getBatches($conn){
+    $res = mysqli_query($conn, "SELECT `PK_ID`, `BatchID` FROM `tbl_batch` ORDER BY tbl_batch.PK_ID");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
     }
-    return mysqli_fetch_array($res);
+    return $res;
 }
 
 //Clean Text//
@@ -284,8 +284,8 @@ function check_existance($table, $column_name, $value, $conn){
     }
 }
 //Add Student//
-function addStudent($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester, $conn){
-    $res = mysqli_query($conn, "INSERT INTO `tbl_user`(`FullName`, `Username`, `StudentID`, `IsAdvancePaid`, `CourseStatus`, `ContactNumber`, `PaidFee`, `Password`, `FK_Programme`, `FK_Batch`, `Email`, `JoinigData`, `CurrentSemester`) VALUES ($fullName, $username, $studentId, $isAdvancePaid, $courseStatus, $contactNumber, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester select `PK_ID` from `tbl_user` where `PK_ID`=LAST_INSERT_ID()");
+function addStudent($fullName, $username, $studentId, $isAdvancePaid, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester, $conn){
+    $res = mysqli_query($conn, "INSERT INTO `tbl_user`(`FullName`, `Username`, `StudentID`, `IsAdvancePaid`, `PaidFee`, `Password`, `FK_Programme`, `FK_Batch`, `Email`, `JoinigData`, `CurrentSemester`) VALUES ($fullName, $username, $studentId, $isAdvancePaid, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester select `PK_ID` from `tbl_user` where `PK_ID`=LAST_INSERT_ID()");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();

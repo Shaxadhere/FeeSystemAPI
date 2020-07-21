@@ -3,6 +3,13 @@
 include_once('../config.php');
 $conn = connect();
 
-return selectProgramme($conn);
+$programmeData = selectProgramme($conn);
+while ($row = mysqli_fetch_assoc($programmeData)) {
+    $programmeList[] = $row;
+}
+
+
+$json['programmeList'] = $programmeList;
+echo json_encode($json);
 
 ?>
