@@ -241,7 +241,7 @@ function selectBatch($conn){
 
 //Select Programme//
 function selectProgramme($conn){
-    $res = mysqli_query($conn, "SELECT `PK_ID`, `ProgrammeName` FROM `tbl_Programme` ORDER BY tbl_Programme.PK_ID DESC");
+    $res = mysqli_query($conn, "SELECT `PK_ID`, `ProgrammeName` FROM `tbl_programme` ORDER BY tbl_programme.PK_ID DESC");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
@@ -276,22 +276,61 @@ function check_existance($table, $column_name, $value, $conn){
         printf("Error: %s\n", mysqli_error($conn));
         exit();
     }
-    if($res == 0){
+    $num = mysqli_fetch_array($res);
+    if($num[0] == 0){
         return true;
     }
     else{
         return false;
     }
 }
-//Add Student//
-function addStudent($fullName, $username, $studentId, $isAdvancePaid, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester, $conn){
-    $res = mysqli_query($conn, "INSERT INTO `tbl_user`(`FullName`, `Username`, `StudentID`, `IsAdvancePaid`, `PaidFee`, `Password`, `FK_Programme`, `FK_Batch`, `Email`, `JoinigData`, `CurrentSemester`) VALUES ($fullName, $username, $studentId, $isAdvancePaid, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester select `PK_ID` from `tbl_user` where `PK_ID`=LAST_INSERT_ID()");
+
+//Get Programme ID//
+function getProgrammeIdByName($name, $conn){
+    $res = mysqli_query($conn, "SELECT `PK_ID` FROM `tbl_programme` WHERE tbl_programme.ProgrammeName = '$name'");
     if (!$res) {
         printf("Error: %s\n", mysqli_error($conn));
         exit();
     }
     return $res;
 }
+
+//Get Batch ID//
+function getBatchIdByName($name, $conn){
+    $res = mysqli_query($conn, "SELECT `PK_ID` FROM `tbl_batch` WHERE tbl_batch.BatchID = '$name'");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
+
+//Add Student//
+function addStudent($fullName, $username, $studentId, $isAdvancePaid, $paidFee, $password, $FK_Programme, $FK_Batch, $email, $joiningDate, $currentSemester, $conn){
+    echo $fullName.$username;
+    exit;
+    $res = mysqli_query(
+        $conn,
+        "INSERT INTO `tbl_user`(`FullName`, `Username`, `StudentID`, `IsAdvancePaid`, `PaidFee`, `Password`, `FK_Programme`, `FK_Batch`, `Email`, `JoinigData`, `CurrentSemester`) VALUES ('1111123fullName', '1111123username', '$studentId', '$isAdvancePaid', '$paidFee', '$password', '1', '1', '$email', '$joiningDate', '$currentSemester')");
+        
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+}
+
+//Initialise Attendance//
+function getLastRow($conn){
+    $res = mysqli_query($conn, "SELECT PK_ID FROM tbl_user ORDER BY PK_ID DESC LIMIT 1");
+    if (!$res) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+    return $res;
+    
+}
+
 //Get next days//
 function getNextDays($number_of_days){
     $days   = [];
